@@ -29,68 +29,132 @@ const womenList = document.getElementById("women-list");
 /* =========================
    DUMMY DATA
 ========================= */
-const womenData = [
-  {
-    id: 1,
-    name: "Success Olamide",
-    location: "Lagos",
-    phone: "+234 803 211 0045",
-    week: 28,
-    language: "Igbo",
-    progress: 85,
-    date: "18 May 2026"
-  },
-  {
-    id: 2,
-    name: "Salam Yusuf",
-    location: "Ikeja",
-    phone: "+234 805 111 2222",
-    week: 24,
-    language: "Hausa",
-    progress: 20,
-    date: "20 May 2026"
-  },
-  {
-    id: 3,
-    name: "Ngozi Kalu",
-    location: "Surulere",
-    phone: "+234 802 999 1111",
-    week: 18,
-    language: "Igbo",
-    progress: 10,
-    date: "20 May 2026"
-  },
-  {
-    id: 4,
-    name: "Chioma Eze",
-    location: "Ikeja",
-    phone: "+234 805 332 7781",
-    week: 24,
-    language: "Hausa",
-    progress: 70,
-    date: "20 May 2026"
-  },
-  {
-    id: 5,
-    name: "Thanks promise",
-    location: "Ikeja",
-    phone: "+234 805 111 2222",
-    week: 24,
-    language: "Hausa",
-    progress: 85,
-    date: "20 May 2026"
-  },
-  {
-    id: 6,
-    name: "Anuoluwa Maryam",
-    location: "Ota",
-    phone: "+234 805 111 2222",
-    week: 24,
-    language: "pigin",
-    progress: 20,
-    date: "20 May 2026"
+
+async function viewWoman(pregnancyId) {
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:3000/api/v1/pregnancies/${pregnancyId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to fetch pregnancy");
+        }
+
+        const result = await response.json();
+
+        const pregnancy = result.data;
+        const woman = pregnancy.woman;
+
+        console.log(result);
+
+        alert(`
+Name: ${woman.firstName} ${woman.lastName}
+Phone: ${woman.phone}
+Language: ${woman.preferredLanguage}
+Week: ${pregnancy.gestationalWeek}
+Status: ${pregnancy.status}
+        `);
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
+
+}
+
+let womenData = [];
+
+async function loadPregnancies() {
+  try {
+    const response = await fetch("http://localhost:3000/api/v1/pregnancies", {
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("token")}` // if your API requires authentication
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to load pregnancies");
+    }
+
+    womenData = await response.json();
+
+    renderWomenList();
+
+  } catch (error) {
+    console.error(error);
   }
-];
+}
+
+// const womenData = [
+//   {
+//     id: 1,
+//     name: "Success Olamide",
+//     location: "Lagos",
+//     phone: "+234 803 211 0045",
+//     week: 28,
+//     language: "Igbo",
+//     progress: 85,
+//     date: "18 May 2026"
+//   },
+//   {
+//     id: 2,
+//     name: "Salam Yusuf",
+//     location: "Ikeja",
+//     phone: "+234 805 111 2222",
+//     week: 24,
+//     language: "Hausa",
+//     progress: 20,
+//     date: "20 May 2026"
+//   },
+//   {
+//     id: 3,
+//     name: "Ngozi Kalu",
+//     location: "Surulere",
+//     phone: "+234 802 999 1111",
+//     week: 18,
+//     language: "Igbo",
+//     progress: 10,
+//     date: "20 May 2026"
+//   },
+//   {
+//     id: 4,
+//     name: "Chioma Eze",
+//     location: "Ikeja",
+//     phone: "+234 805 332 7781",
+//     week: 24,
+//     language: "Hausa",
+//     progress: 70,
+//     date: "20 May 2026"
+//   },
+//   {
+//     id: 5,
+//     name: "Thanks promise",
+//     location: "Ikeja",
+//     phone: "+234 805 111 2222",
+//     week: 24,
+//     language: "Hausa",
+//     progress: 85,
+//     date: "20 May 2026"
+//   },
+//   {
+//     id: 6,
+//     name: "Anuoluwa Maryam",
+//     location: "Ota",
+//     phone: "+234 805 111 2222",
+//     week: 24,
+//     language: "pigin",
+//     progress: 20,
+//     date: "20 May 2026"
+//   }
+// ];
 
 /* =========================
    STATUS SYSTEM (ONE SOURCE OF TRUTH)
@@ -130,17 +194,7 @@ function getStatus(progress) {
 /* =========================
    VIEW DETAILS
 ========================= */
-function viewWoman(id) {
-  const woman = womenData.find(w => w.id === id);
-  if (!woman) return;
 
-  alert(
-    `Name: ${woman.name}
-Location: ${woman.location}
-Week: ${woman.week}
-Phone: ${woman.phone}`
-  );
-}
 
 /* =========================
    RENDER FUNCTION

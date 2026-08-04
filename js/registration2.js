@@ -40,6 +40,9 @@
 // Ensure this matches the ID in your HTML <form id="registration-form2">
 const form = document.getElementById("registration-form2");
 
+document.getElementById("assignedChew").value =
+    localStorage.getItem("chewName");
+
 form.addEventListener("submit", (e) => {
     // 1. Prevent the page from refreshing
     e.preventDefault();

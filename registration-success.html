@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" href="css/success.css">
+</head>
+<body>
+
+<div class="card">
+
+    <div class="icon">✓</div>
+
+    <h2>Patient Registered Successfully</h2>
+
+    <p><strong>Phone number verified.</strong></p>
+
+    <p>
+        The patient will now receive ANC reminders,
+        appointment notifications,
+        and important maternal health messages.
+    </p>
+
+    <button id="continueBtn">
+        Continue to Overview
+    </button>
+
+</div>
+
+<script>
+document.getElementById("continueBtn").addEventListener("click", () => {
+    window.location.href = "overview.html";
+});
+</script>
+
+</body>
+</html>

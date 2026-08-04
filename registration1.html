@@ -36,14 +36,22 @@
                 <input
                     type="text"
                     id="firstName"
-                    placeholder="Full Name"
+                    placeholder="First Name"
+                    required
                     
                 >
                 <input
                     type="text"
-                    id="lastNamee"
-                    placeholder="Full Name"
-                    
+                    id="lastName"
+                    placeholder="Last Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email Address"
+                    required
                 >
 
                 <div class="phone-group">
@@ -52,6 +60,7 @@
                         type="tel"
                         id="phone"
                         placeholder="Phone Number"
+                        required
                         
                     >
                 </div>
@@ -61,6 +70,7 @@
                         type="text"
                         id="address"
                         placeholder="Residential Address"
+                        required
                         
                     >
                     <span>📍</span>
@@ -70,16 +80,17 @@
                     type="text"
                     id="lga"
                     placeholder="LGA"
+                    required
                     
                 >
 
-                <select id="language" >
+                <select id="language" required>
                     <option value="">Preferred Language</option>
-                    <option>English</option>
-                    <option>Yoruba</option>
-                    <option>Igbo</option>
-                    <option>Hausa</option>
-                    <option>Pigin</option>
+                    <option value="english">English</option>
+                    <option value="yoruba">Yoruba</option>
+                    <option value="igbo">Igbo</option>
+                    <option value="hausa">Hausa</option>
+                    <option value="pidgin">Pidgin</option>
                 </select>
 
                 <button type="submit"

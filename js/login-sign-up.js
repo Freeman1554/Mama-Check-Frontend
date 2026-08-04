@@ -1,4 +1,7 @@
-const BASE_URL = "https://mama-check23.onrender.com";
+
+const BASE_URL = "http://localhost:3000";
+
+//const BASE_URL = "https://mama-check23.onrender.com";
 
 
 // API ENDPOINTS

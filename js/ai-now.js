@@ -88,7 +88,8 @@ async function fetchFullDashboardData() {
     try {
         const token = localStorage.getItem("accessToken");
         
-        const response = await fetch("https://mama-check.onrender.com/api/v1/dashboard/full-dashboard?role=chew", {
+        //const response = await fetch("https://mama-check.onrender.com/api/v1/dashboard/full-dashboard?role=chew",
+        const response = await fetch("http://localhost:3000/api/v1/dashboard/full-dashboard?role=chew", {
             method: "GET",
             headers: {
                 "Accept": "application/json",
@@ -122,6 +123,70 @@ async function fetchFullDashboardData() {
             if (el) el.textContent = "0";
         });
     }
+}
+
+async function fetchMissedVisitStats() {
+    const missedVisitsEl = document.getElementById("stat-missed-visits");
+
+    try {
+        const token = localStorage.getItem("accessToken");
+
+        const response = await fetch(
+            "http://localhost:3000/api/v1/dashboard/missed-visit/stats",
+            {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error(`HTTP Error ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        console.log(result);
+
+        if (result.success) {
+            // Change this depending on your backend response
+            missedVisitsEl.textContent =
+                result.data.totalMissedVisits ?? 0;
+        } else {
+            missedVisitsEl.textContent = "0";
+        }
+
+    } catch (error) {
+        console.error("Failed to load missed visit statistics:", error);
+        missedVisitsEl.textContent = "0";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    await personalizeCHEWProfile();
+
+    initializeDate();
+    initializeSidebarNavigation();
+
+    await fetchFullDashboardData();
+    await fetchMissedVisitStats();
+
+    initializeSearch();
+    initializeEnrollButton();
+    initializeViewButtons();
+    initializeAlertCards();
+});
+
+
+if (missedVisitsEl) {
+    const missedArray = result.dashboard.missedVisitsByTriage || [];
+    const totalMissed = missedArray.reduce(
+        (acc, current) => acc + (current.missedVisits || 0),
+        0
+    );
+    missedVisitsEl.textContent = totalMissed;
 }
 
 /**

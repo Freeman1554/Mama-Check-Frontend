@@ -161,6 +161,41 @@
 // --- DOM Elements ---
 const verifyBtn = document.querySelector(".verify-btn");
 const otpInputs = document.querySelectorAll(".otp-input");
+const resendBtn = document.getElementById("resendBtn");
+const countdown = document.getElementById("countdown");
+
+//Countdown Variables
+let seconds = 60;
+let countdownInterval = null;
+
+//Countdown functions
+function startCountdown() {
+    clearInterval(countdownInterval);
+
+    resendBtn.disabled = true;
+
+    countdown.textContent = `Resend available in ${seconds}s`;
+
+    countdownInterval = setInterval(() => {
+        seconds--;
+
+        countdown.textContent = `Resend available in ${seconds}s`;
+
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            resendBtn.disabled = false;
+            resendBtn.textContent = "Resend Code";
+            countdown.textContent = "";
+        }
+    }, 1000);
+}
+
+//Start Countdown once page opens
+window.addEventListener("DOMContentLoaded", () => {
+    seconds = 60;
+    startCountdown();
+});
+
 
 // --- 1. Auto-focus Logic ---
 otpInputs.forEach((input, index) => {
@@ -172,50 +207,174 @@ otpInputs.forEach((input, index) => {
 });
 
 // --- 2. Verify Button Event Listener ---
+
 verifyBtn.addEventListener("click", async () => {
-    const otp = [...otpInputs].map(input => input.value.trim()).join("");
-    
+
+    const otp = [...otpInputs]
+        .map(input => input.value.trim())
+        .join("");
+
     if (otp.length !== 6) {
-        alert("Please enter the full 6-digit OTP.");
+        alert("Please enter the complete verification code.");
         return;
     }
 
-    const registrationData = JSON.parse(localStorage.getItem("registrationData"));
-    if (!registrationData) {
-        alert("Registration data lost. Please restart the process.");
+    const phone = localStorage.getItem("phone")
+    
+    if(!phone){
+        alert("Registration information missing")
         window.location.href = "registration.html";
         return;
     }
 
     try {
+
         verifyBtn.disabled = true;
         verifyBtn.textContent = "Verifying...";
+        
+        console.log("Phone:", phone);
+        console.log("OTP:", otp);
+        const response = await fetch(
+            "http://localhost:3000/api/v1/auth/verify-otp",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    phone: phone,
+                    otp: otp
+                })
+            }
+        );
+       
+        const result = await response.json();
+         console.log("Verify response", result);
 
-        const finalPayload = { ...registrationData, otp: otp };
-
-        const response = await fetch("https://mama-check23.onrender.com/api/v1/auth/request-otp", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(finalPayload) 
-        });
-
-        const result = await response.json().catch(() => ({}));
-
-        if (response.ok) {
-            alert("Registration successful!");
-            localStorage.removeItem("registrationData");
-            
-            // NAVIGATION: Ensure overview.html is in the same directory
-            console.log("Redirecting to overview.html...");
-            window.location.replace("overview.html"); 
-        } else {
-            alert(result.message || "Registration failed. Please check your OTP.");
+        if (!response.ok) {
+            console.error("Backend Error:", result.error)
+            alert(result.error);
+            return;
         }
+
+        //localStorage.setItem("token", result.token);
+        localStorage.setItem("phone", phone);
+        localStorage.removeItem("registrationData");
+
+        alert("Patient phone verified successfully.");
+
+        console.log("Redirecting...")
+
+        window.location.href = "registration-success.html";
+
+        //window.location.href = "overview.html";
+
     } catch (error) {
-        console.error("Registration Error:", error);
-        alert("Network error. Please check your connection.");
+
+        console.error("Verification Error", error);
+
+        alert(error.message);
+
     } finally {
+
         verifyBtn.disabled = false;
         verifyBtn.textContent = "Verify Number";
+
+    }
+
+});
+
+    resendBtn.addEventListener("click", async () => {
+    const phone = localStorage.getItem("phone");
+
+    if (!phone) {
+        alert("Phone number not found. Please register again.");
+        return;
+    }
+
+    try {
+        resendBtn.disabled = true;
+        resendBtn.textContent = "Sending...";
+
+        const response = await fetch(
+            "http://localhost:3000/api/v1/auth/request-otp",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ phone })
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            alert(result.error || "Unable to resend verification code.");
+            return;
+        }
+
+        alert("A new verification code has been sent.");
+
+        // Restart your countdown
+        seconds = 60;
+        startCountdown();
+
+    } catch (error) {
+        console.error(error);
+        alert("Network error.");
+    } finally {
+        //resendBtn.disabled = false;
+        resendBtn.textContent = "Resend Code";
     }
 });
+
+// verifyBtn.addEventListener("click", async () => {
+//     const otp = [...otpInputs].map(input => input.value.trim()).join("");
+    
+//     if (otp.length !== 6) {
+//         alert("Please enter the full 6-digit OTP.");
+//         return;
+//     }
+
+//     const registrationData = JSON.parse(localStorage.getItem("registrationData"));
+//     if (!registrationData) {
+//         alert("Registration data lost. Please restart the process.");
+//         window.location.href = "registration.html";
+//         return;
+//     }
+
+//     try {
+//         verifyBtn.disabled = true;
+//         verifyBtn.textContent = "Verifying...";
+
+//         const finalPayload = { phone: registrationData.phone, otp: otp };
+
+//         const response = await fetch("http://localhost:3000/api/v1/auth/verify-otp", {
+
+//         //const response = await fetch("https://mama-check23.onrender.com/api/v1/auth/request-otp", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify(finalPayload) 
+//         });
+
+//         const result = await response.json().catch(() => ({}));
+
+//         if (response.ok) {
+//             alert("Registration successful!");
+//             localStorage.removeItem("registrationData");
+            
+//             // NAVIGATION: Ensure overview.html is in the same directory
+//             console.log("Redirecting to overview.html...");
+//             window.location.replace("overview.html"); 
+//         } else {
+//             alert(result.message || "Registration failed. Please check your OTP.");
+//         }
+//     } catch (error) {
+//         console.error("Registration Error:", error);
+//         alert("Network error. Please check your connection.");
+//     } finally {
+//         verifyBtn.disabled = false;
+//         verifyBtn.textContent = "Verify Number";
+//     }
+// });

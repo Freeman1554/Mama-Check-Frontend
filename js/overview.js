@@ -40,12 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch Current Logged-in User Profile
   const fetchUserProfile = async () => {
     try {
-      const response = await fetch("https://mama-check23.onrender.com/api/v1/auth/me", {
+        //const response = await fetch("https://mama-check23.onrender.com/api/v1/auth/me",
+        const response = await fetch("http://localhost:3000/api/v1/auth/me", {
         headers: { 
           "Authorization": `Bearer ${TOKEN}`,
           "Accept": "application/json"
         }
       });
+      
       if (!response.ok) throw new Error("Failed to load profile");
       const user = await response.json();
       
@@ -55,8 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
       const lastName = userData.lastName || "";
       const fullName = userData.name || `${firstName} ${lastName}`.trim() || "CHEW User";
       
-      profileName.textContent = fullName;
+      localStorage.setItem("chewName", fullName);
+
       
+      profileName.textContent = fullName;
+
+            
       // Format UI locations using LGA and State
       if (userData.lga && userData.state) {
         const formatLocation = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -74,7 +80,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Automatically chain down the specific user ID for contextual data
-      const chewId = userData.id || userData.userId; 
+      const chewId = 
+      userData._id || 
+      userData.id ||
+      userData.userId; 
+      console.log(userData);
+
+      localStorage.setItem("chewId", chewId);
+      console.log("CHEW ID:", chewId);
+
+      
       if (chewId) {
         fetchChewPregnancies(chewId);
       } else {
@@ -91,7 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Fetch Summary KPIs Dashboard Module Data
   const fetchDashboardData = async () => {
     try {
-      const response = await fetch("https://mama-check23.onrender.com/api/v1/chew/dashboard", {
+      //const response = await fetch(  `http://localhost:3000/api/v1/dashboard/pregnancy/chew/${chewId}`, {
+      const response = await fetch("http://localhost:3000/api/v1/dashboard/chew/overview", {
         headers: { 
           "Authorization": `Bearer ${TOKEN}`,
           "Accept": "application/json"
@@ -113,17 +129,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch Pregnancies assigned to the logged-in CHEW ID
   const fetchChewPregnancies = async (chewId) => {
+
+    console.log("Fetching pregnancies for CHEW:", chewId);
     try {
-      const response = await fetch(`They should use the documentation sent earlier, cause other part of the URL is there to complete this one sent. Example https://mamacheck26.onrender.com/api/v1/pregnancies/chew/${chewId}`, {
+      
+      const response = await fetch(`http://localhost:3000/api/v1/pregnancies/chew/${chewId}`, {
+      //const response = await fetch( "http://localhost:3000/api/v1/dashboard/chew/overview", {
         headers: { 
           "Authorization": `Bearer ${TOKEN}`,
           "Accept": "application/json"
         }
       });
       if (!response.ok) throw new Error("Failed to load pregnancies");
-      const pregnancies = await response.json();
+      const result = await response.json();
+      //const pregnancies = await response.json();
+      console.log(result)
+      //console.log(result);
+      console.log(result.data);
+      console.log(Array.isArray(result.data));
+      //console.log("Pregnancies:", pregnancies);
 
-      renderRecentPatients(pregnancies);
+    console.log("Patients to render:", result.data);
+      renderRecentPatients(result.data);
     } catch (error) {
       console.error("Error fetching pregnancies list:", error);
       showTableError("Failed to fetch assigned patients from registry.");
@@ -140,16 +167,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Render Patient Registry Table
   const renderRecentPatients = (patients) => {
+    console.log("Rendering patients:", patients);
     const listData = Array.isArray(patients) ? patients : (patients.recentRegistrations || []);
-
+  
     if (listData.length === 0) {
       womenListTableBody.innerHTML = `
         <tr>
           <td colspan="5" style="text-align: center; padding: 20px; color: #A1A1AA;">No recent patient registrations found.</td>
         </tr>`;
+        console.log(womenListTableBody);
       return;
     }
-
+    
     // Cap display items at 5 rows for clean view dashboard presentation
     const itemsToRender = listData.slice(0, 5);
 
@@ -157,18 +186,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const statusClass = patient.status?.toLowerCase() === 'high risk' ? 'status-red' : 'status-green';
       
       return `
-        <tr>
-          <td><strong>${patient.name || 'Unnamed Mama'}</strong></td>
-          <td>Wk ${patient.currentWeek || '--'}</td>
-          <td>
-            <div class="progress-bar-placeholder" style="font-size:0.85rem;">
-               ${patient.ancVisitsAttended || 0} Visits Completed
-            </div>
-          </td>
-          <td><span class="status-pill ${statusClass}">${patient.status || 'Active'}</span></td>
-          <td><a href="ancTracker.html?id=${patient.id || patient._id}" class="action-view-btn">Manage</a></td>
-        </tr>
-      `;
+        <td><strong>${patient.womanName || patient.phone || 'Unknown'}</strong></td>
+<td>Wk ${patient.gestationalWeek ?? '--'}</td>
+<td>${new Date(patient.registrationDate).toLocaleDateString()}</td>
+<td><span class="status-pill ${statusClass}">${patient.status}</span></td>
+<td><a href="ancTracker.html?id=${patient.id}" class="action-view-btn">Manage</a></td>      `;
     }).join('');
   };
 

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MamaCheck Admin Dashboard</title>
+
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-box1">
+            <img src="images/image 11.svg" alt="">
+            <p>Admin Dashboard</p>
+        </div>
+        <!-- <div class="header-box2">
+            <div class="search-box">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div>
+                <h2 id="date">Fri, 15 May 2026</h2>
+            </div> -->
+        </div>
+
+    </header>
+
+<div class="wrapper">
+
+    <!-- =======================
+         SIDEBAR
+    ========================-->
+
+    <aside class="sidebar">
+
+        <!-- <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-heart-circle-check"></i>
+            </div>
+
+            <h2>MamaCheck</h2>
+
+        </div> -->
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Territory Overview
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Red Flags
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-hospital"></i>
+                    PHCs
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-user-nurse"></i>
+                    CHEWs
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-users"></i>
+                    Registered Women
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="profile">
+
+            <div class="avatar">
+                NK
+            </div>
+
+            <div>
+
+                <h4>Nurse Ngozi Kalu</h4>
+                <span>Admin</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- ==========================
+            MAIN CONTENT
+    ===========================-->
+
+    <main class="main-content">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h2>Territory Overview</h2>
+
+                <p>Kano LGA • 5 PHCs • 26 CHEWs</p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <div class="search">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Search...">
+
+                </div>
+
+                <button class="notify">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                    <span>4</span>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ====================
+            STATS
+        =====================-->
+
+        <section class="stats">
+
+            <div class="card">
+
+                <div>
+
+                    <small>Registered Women</small>
+
+                    <h1 id="women">0</h1>
+
+                    <span class="green">
+                        +58 this week
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>ANC Visits</small>
+
+                    <h1 id="anc">0</h1>
+
+                    <span class="green">
+                        82% completion
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-stethoscope"></i>
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Missed Visits</small>
+
+                    <h1 id="missed">0</h1>
+
+                    <span class="red">
+                        +12 this month
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-clock"></i>
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Open Red Flags</small>
+
+                    <h1 id="flags">0</h1>
+
+                    <span class="red">
+                        4 overdue
+                    </span>
+
+                </div>
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==========================
+                TABLE
+        ===========================-->
+
+        <section class="table-section">
+
+            <div class="table-header">
+
+                <div>
+
+                    <h3>Facilities Under Your Watch</h3>
+
+                    <p>Select a PHC to view details.</p>
+
+                </div>
+
+                <select>
+
+                    <option>This Month</option>
+
+                    <option>Last Month</option>
+
+                    <option>This Year</option>
+
+                </select>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Facility</th>
+
+                    <th>Women</th>
+
+                    <th>ANC Visits</th>
+
+                    <th>Missed</th>
+
+                    <th>Red Flags</th>
+
+                    <th>CHEWs</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="facilityTable">
+
+                <!-- Filled by JavaScript -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
