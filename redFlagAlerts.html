@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="icon" href="images/image 11.svg" type="image/svg+xml">
     <!-- <script src="/js/redFlagAlerts.js" defer></script> -->
-    <script src="/js/womenregistry.js" defer></script>
+    <script defer src="/js/redFlagAlerts.js"></script>
 </head>
 <body>
      <!-- aside bar -->
@@ -99,82 +99,41 @@
                     <button class="redflag-btn">All</button>
                 </div>
             </div>
-             <!-- red flag card rows -->
+              <!-- red flag cards -->
               <div class="redflag-cards">
-                <!-- redflag card -->
-                <div class="redflag-card">
-                    <!-- redflag left -->
-                    <div class="redflag-left">
-                        <div class="redflag-icon">
-                            <img src="/images/alert caution mark.svg" alt="caution icon">
-                        </div>
-                        <div class="redflag-text">
-                            <h5>Adaeze Okonkwo</h5>
-                            <span>Wk 28 • +234 803 211 0045 • Awka PHC • Reported today 08:42</span>
-                            <div class="redflag-pills"> <span class="redflag-pill">Heavy Bleeding</span> <span class="redflag-pill">Severe abdominal pain</span></div>
-                            <span>CHEW alerted: 08:42 • Trusted contact alerted: 08:42 • CHEW SMS delivered<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.5 6.02167L1.83833 7.45667C2.57667 8.24833 2.94583 8.64333 3.35917 8.76833C3.7225 8.8775 4.10917 8.84833 4.455 8.685C4.84917 8.49833 5.165 8.05083 5.79833 7.155L10.5 0.5" stroke="#79747E" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
-                        </div>
+               <!--JS  will be inserted here -->
+
+                <!-- modal -->                          
+               <div class="closeRflag">
+                <div class="closeRflag-head"><h3>Close Red Flag Case</h3> <button class="closeredflag-cancel"><img src="images/redflagcancel.png" alt="cancel icon"></button></div>
+                 <!-- close red flag options -->
+                  <div class="closeredflag-options">
+                    <p><span id="closedredflag-name"></span> reported: Heavy bleeding, Severe abdominal pain</p>
+                    <div class="closeredflag-outcomes">
+                       <p>FOLLOW UP OUTCOME</p>
+                       <p class="closeredflag-outcome"><input type="radio">Too many emails/notifications</p>
+                       <p class="closeredflag-outcome"><input type="radio">Spoke to patient by phone</p>
+                       <p class="closeredflag-outcome"><input type="radio">Patient visited the clinic</p>
+                       <p class="closeredflag-outcome"><input type="radio">Referred to secondary facility</p>
+                       <p class="closeredflag-outcome"><input type="radio">Unable to reach patient</p>
+                       <div class="closedredflag-notes">
+                           <label for="closedredflag-notes">Notes(optional)</label>
+                           <textarea id="closedredflag-notes" placeholder="Enter notes here..."></textarea>
+                       </div>
                     </div>
-                    <!-- redflag right -->
-                     <div class="redflag-right">
-                        <a href="#">OPEN</a>
-                        <span>Today</span>
-                        <span>08:42</span>
-                        <button class="close-red">Close case</button>
-                     </div>
-                </div>
-                <!-- redflag card -->
-                <div class="redflag-card">
-                    <!-- redflag left -->
-                    <div class="redflag-left">
-                        <div class="redflag-icon">
-                            <img src="/images/alert caution mark.svg" alt="caution icon">
-                        </div>
-                        <div class="redflag-text">
-                            <h5>Blessing Nwosu</h5>
-                            <span>Wk 28 • +234 808 445 2201 • Awka PHC • Reported today 14:05</span>
-                            <div class="redflag-pills"> <span class="redflag-pill">Severe</span> <span class="redflag-pill">Blurry vision</span></div>
-                            <span>CHEW alerted: 14:05 • Trusted contact alerted: 14:05 • CHEW SMS delivered<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.5 6.02167L1.83833 7.45667C2.57667 8.24833 2.94583 8.64333 3.35917 8.76833C3.7225 8.8775 4.10917 8.84833 4.455 8.685C4.84917 8.49833 5.165 8.05083 5.79833 7.155L10.5 0.5" stroke="#79747E" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
-                        </div>
-                    </div>
-                    <!-- redflag right -->
-                     <div class="redflag-right">
-                        <a href="#">OPEN</a>
-                        <span>Yesterday</span>
-                        <span>14:05</span>
-                        <button class="close-red">Close case</button>
-                     </div>
-                </div>
-                <!-- redflag card -->
-                <div class="redflag-card">
-                    <!-- redflag left -->
-                    <div class="redflag-left">
-                        <div class="redflag-icon">
-                            <img src="/images/alert caution mark.svg" alt="caution icon">
-                        </div>
-                        <div class="redflag-text">
-                            <h5 id="name">Ngozi Obi</h5>
-                            <span>Wk 36 • +234 806 338 7712 • Awka PHC • Reported today 07:18</span>
-                            <div class="redflag-pills"> <span class="redflag-pill">Heavy Bleeding</span></div>
-                            <span>CHEW alerted: 07:18 • Trusted contact alerted: 07:18 • CHEW SMS delivered<svg width="11" height="10" viewBox="0 0 11 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M0.5 6.02167L1.83833 7.45667C2.57667 8.24833 2.94583 8.64333 3.35917 8.76833C3.7225 8.8775 4.10917 8.84833 4.455 8.685C4.84917 8.49833 5.165 8.05083 5.79833 7.155L10.5 0.5" stroke="#79747E" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></span>
-                        </div>
-                    </div>
-                    <!-- redflag right -->
-                     <div class="redflag-right">
-                        <a href="#">OPEN</a>
-                        <span>Yesterday</span>
-                        <span>07:18</span>
-                        <button class="close-red">Close case</button>
-                     </div>
-                </div>
+                    <!-- close red flag buttons -->
+                  <div class="closedredflag-btns">
+                      <button class="closeredflag-cancel">Cancel</button>
+                      <button class="closeCase-btn">Close Case</button>
+                  </div>
+
+                 </div>
+               </div>
 
               </div>
+              <!-- modal ends here -->
+              </div>
+
            </div>
          </div>
           </main>

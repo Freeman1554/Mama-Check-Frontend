@@ -41,11 +41,9 @@ ul{
     width:260px;
     background:#5b2ca0;
     color:white;
-
     display:flex;
     flex-direction:column;
     justify-content:space-between;
-
     padding:25px 18px;
 
 }

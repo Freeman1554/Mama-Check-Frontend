@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MamaCheck Admin Redflag</title>
+      <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- css -->
+     <link rel="stylesheet" href="css/adminRedflag.css">
+     <!-- js -->
+     <script defer src="js/adminRedflag.js"></script>
+</head>
+<body>
+     <header class="header">
+        <div class="header-box1">
+            <img src="images/image 11.svg" alt="">
+            <p>Admin Dashboard</p>
+        </div>
+        <div class="header-box2">
+           <div class="hbox1">
+            <h2>Admin Dashboard</h2>
+            <p>Kano LGA · SPHCDA</p>
+           </div>
+
+           <div class="hbox2">
+            <!-- search icon -->
+              <img src="/images/searchash.png" alt="">
+              <!-- bell icon -->
+              <img src="/images/bellash.png" alt="">
+              <!-- settings -->
+              <img src="/images/settingash.png" alt="">
+           </div>
+        </div>
+
+    </header>
+
+<div class="wrapper">
+
+    <!-- =======================
+         SIDEBAR
+    ========================-->
+
+    <aside class="sidebar">
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Territory Overview
+                </a>
+            </li>
+
+            <li>
+                <a href="adminRedflag.html">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Red Flags
+                </a>
+            </li>
+
+            <li>
+                <a href="adminReport.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+             <li>
+                <a href="#">
+                    <i class="fa-solid fa-user-nurse"></i>
+                    Reassign Cases
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-hospital"></i>
+                    PHCs
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="profile">
+
+            <div class="avatar">
+                NK
+            </div>
+
+            <div>
+
+                <h4>Nurse Ngozi Kalu</h4>
+                <span>Admin</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!--==================
+            MAIN
+    ======================-->
+     <main>
+         <!-- Stats Section -->
+         <section class="stats">
+
+            <div class="card">
+
+                <div>
+
+                    <small>Registered Women</small>
+
+                    <h1 id="womenredflag">0</h1>
+
+                    <span class="green">
+                       ↗+58 this week
+                    </span>
+
+                </div>
+
+                <img src="images/greenprofile.png" alt="">
+
+            </div>
+
+              <div class="card">
+
+                <div>
+
+                    <small>ANC Visits(Nov)</small>
+
+                    <h1 id="ancredflag">0</h1>
+
+                    <span class="green">
+                       ↗ 82% completion
+                    </span>
+
+                </div>
+
+                <img src="images/greenmedic.png" alt="">
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Missed Visits</small>
+
+                    <h1 id="missedredflag">0</h1>
+
+                    <span class="red">
+                       ↘ +12 this month
+                    </span>
+
+                </div>
+
+                <img src="images/orangeclock.png" alt="">
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Open Red Flags</small>
+
+                    <h1 id="openredflag">0</h1>
+
+                    <span class="red">
+                       ↘ 4 overdue
+                    </span>
+
+                </div>
+
+                <img src="images/redcaution.png" alt="">
+
+            </div>
+
+         </section>
+
+          <!-- text seperator -->
+         <div class="text-seperator">
+            <small>pHCs in territory</small>
+            <small class="redflag">Red flag escalations</small>
+            <small>Reports</small>
+         </div>
+
+         <!-- open red flag -->
+          <section>
+            <div class="adminOpenRflag">
+                <div class="openRflag-header">
+                <div class="openRflag-head"><img src="images/caution.png" alt="cautionimage"> <h3>Open Red flags across your territory</h3></div>
+                <p>Sorted by most recent. Cases without a follow-up after 24h are highlighted.</p>
+            </div>
+            <div class="openRflag-data">
+                <!-- js will populate here -->
+            </div>
+            </div>
+          </section>
+     </main>
+    <!-- end of wrappe -->
+</div>
+</body>
+</html>

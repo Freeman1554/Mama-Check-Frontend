@@ -70,7 +70,7 @@ function animateCounter(id, target) {
 
     const timer = setInterval(() => {
 
-        current += increment;
+        current += increment;   
 
         if (current >= target) {
 
@@ -220,4 +220,4 @@ animateCounter("anc", dashboardStats.anc);
 animateCounter("missed", dashboardStats.missed);
 animateCounter("flags", dashboardStats.flags);
 
-loadFacilities();
+loadFacilities();                                  

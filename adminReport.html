@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MamaCheck Admin Report</title>
+     <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- css -->
+     <link rel="stylesheet" href="css/adminReport.css">
+     <!-- js -->
+     <script defer src="js/adminReport.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="header-box1">
+            <img src="images/image 11.svg" alt="">
+            <p>Admin Dashboard</p>
+        </div>
+        <div class="header-box2">
+           <div class="hbox1">
+            <h2>Admin Dashboard</h2>
+            <p>Kano LGA · SPHCDA</p>
+           </div>
+
+           <div class="header-actions">
+                <div class="search">
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Search...">
+                </div>
+
+                <button class="notify">
+                    <i class="fa-solid fa-bell"></i>
+
+                    <span>4 new alerts</span>
+                </button>
+            </div>
+        </div>
+
+    </header>
+
+<div class="wrapper">
+
+    <!-- =======================
+         SIDEBAR
+    ========================-->
+
+    <aside class="sidebar">
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Territory Overview
+                </a>
+            </li>
+
+            <li>
+                <a href="adminRedflag.html">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Red Flags
+                </a>
+            </li>
+
+            <li>
+                <a href="adminReport.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+             <li>
+                <a href="#">
+                    <i class="fa-solid fa-user-nurse"></i>
+                    Reassign Cases
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-hospital"></i>
+                    PHCs
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="profile">
+
+            <div class="avatar">
+                NK
+            </div>
+
+            <div>
+
+                <h4>Nurse Ngozi Kalu</h4>
+                <span>Admin</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN -->
+     <main>
+        <!-- Stats Section -->
+         <section class="stats">
+
+            <div class="card">
+
+                <div>
+
+                    <small>Registered Women</small>
+
+                    <h1 id="womenreport">0</h1>
+
+                    <span class="green">
+                       ↗+58 this week
+                    </span>
+
+                </div>
+
+                <img src="images/greenprofile.png" alt="">
+
+            </div>
+
+              <div class="card">
+
+                <div>
+
+                    <small>ANC Visits(Nov)</small>
+
+                    <h1 id="ancreport">0</h1>
+
+                    <span class="green">
+                       ↗ 82% completion
+                    </span>
+
+                </div>
+
+                <img src="images/greenmedic.png" alt="">
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Missed Visits</small>
+
+                    <h1 id="missedreport">0</h1>
+
+                    <span class="red">
+                       ↘ +12 this month
+                    </span>
+
+                </div>
+
+                <img src="images/orangeclock.png" alt="">
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Open Red Flags</small>
+
+                    <h1 id="flagsreport">0</h1>
+
+                    <span class="red">
+                       ↘ 4 overdue
+                    </span>
+
+                </div>
+
+                <img src="images/redcaution.png" alt="">
+
+            </div>
+
+         </section>
+
+         <!-- text seperator -->
+         <div class="text-seperator">
+            <small>pHCs in territory</small>
+            <small>Red flag escalations</small>
+            <small class="report">Reports</small>
+         </div>
+
+         <!-- sphcda report -->
+          <section class="sphreport-section">
+            <!-- first -->
+             <div class="sph-report">
+                <div class="weekly-sph">
+                    <h4>Weekly SPHCDA report</h4>
+                    <small>Nov 25 – Dec 1, 2024 · Kano LGA</small>
+                </div>
+                <button id="exportPdf" class="pdfbtn"><img src="/images/pdfash.png" alt=""> Export PDF</button>
+             </div>
+             <!-- second -->
+              <div class="sph-cards">
+                 <div class="sph-card">
+
+                    <small>WOMEN REGISTERED</small>
+
+                    <h1 id="sphwomen">0</h1>
+
+                    <small>
+                       <span class="green">↝ +17%</span> 
+                       Previous week
+                    </small>
+
+                </div>
+
+                 <div class="sph-card">
+
+                    <small>ANC VISITS ATTENTED</small>
+
+                    <h1 id="sphanc">0</h1>
+
+                    <small>
+                        out of 347 scheduled
+                    </small>
+
+                </div>
+
+                 <div class="sph-card">
+
+                    <small>Missed Visits</small>
+
+                    <h1 id="sphmissed">0</h1>
+
+                    <small>
+                       <span class="orange">↯</span> 
+                       follow-ups scheduled
+                    </small>
+
+                </div>
+
+                 <div class="sph-card">
+
+                    <small>RED FLAGS RESOLVED</small>
+
+                   <div class="sphflag"> <h1 id="sphflags">0 </h1> <span class="number">/14</span></div>
+
+                    <small class="orange">3 still open </small>
+
+                </div>
+
+              </div>
+          </section>
+
+          <!--bar table -->
+          <section class="bar-table">
+           <div class="bar-head">
+            <!-- left -->
+            <div class="bar-left">
+                <h4>ANC visit completion by PHC</h4>
+                <small>This week · All facilities</small>  
+           </div>
+           <div class="bar-right">
+            <small><span class="greendot"></span>≥ 90%</small>
+            <small><span class="greendot"></span>≺ 90%</small>
+           </div>
+           </div>
+           <!-- bar stats -->
+           <div id="bar-stats">
+            <!-- js will populate here -->
+           </div>
+           <!-- bar summary -->
+            <div class="bar-summary">
+                <div class="summary-left">
+                    <p> Average completion across all PHCs this week</p>
+                </div>
+
+                <div class="summary-right">
+                    <p id="avgCompletion" class="green">0</p>
+                </div>
+            </div>
+          </section>
+     </main>
+       
+</div>
+
+</body>
+</html>
