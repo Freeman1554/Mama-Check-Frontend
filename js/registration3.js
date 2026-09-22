@@ -81,6 +81,31 @@
 //     saveAndProceed();
 // });
 
+function normalizePhone(phone) {
+    
+    phone = phone.replace(/\s+/g, "");
+
+    if (phone.startsWith("+234")) {
+        return phone;
+    }
+
+    if (phone.startsWith("234")) {
+        return "+" + phone;
+    }
+
+    if (phone.startsWith("0")) {
+        return "+234" + phone.substring(1);
+    }
+
+    // 10-digit Nigerian number
+    if (/^[789]\d{9}$/.test(phone)) {
+        return "+234" + phone;
+    }
+
+    return phone;
+}
+
+
 
 const form = document.getElementById("registration-form3");
 const skipBtn = document.querySelector(".skip-btn");
@@ -95,10 +120,17 @@ async function submitRegistration() {
         .value
         .trim();
 
-    data.trustedContactPhone = document
+    const trustedContactPhoneInput = document
         .getElementById("trustedContactPhone")
         .value
         .trim();
+    data.phone = normalizePhone(data.phone); // Normalize the main phone number
+    data.trustedContactPhone = normalizePhone(trustedContactPhoneInput);
+
+    // data.trustedContactPhone = document
+    //     .getElementById("trustedContactPhone")
+    //     .value
+    //     .trim();
 
     data.trustedContactRelationship = document.getElementById("relationship").value;
 

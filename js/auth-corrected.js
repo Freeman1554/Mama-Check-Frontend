@@ -233,6 +233,7 @@ authForm.addEventListener("submit", async (e) => {
 
         // UPDATED: Proper routing for both Login and Registration actions
         window.location.href = currentRole === "chew" ? "mama-check.html" : "overview.html";
+        window.location.href = currentTab === "login" ? (currentRole === "admin" ? "admin-dashboard.html" : "mama-check.html") : (currentRole === "admin" ? "overview.html" : "mama-check.html");
 
         authForm.reset();
         updateView();
