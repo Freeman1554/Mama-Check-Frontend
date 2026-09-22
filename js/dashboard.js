@@ -3,13 +3,93 @@
 // dashboard.js
 // ==========================================
 
-// Dashboard Statistics
-const dashboardStats = {
-    women: 1422,
-    anc: 1025,
-    missed: 67,
-    flags: 30
+const BASE_URL = "http://localhost:3000";
+
+const API = {
+    dashboard: `${BASE_URL}/api/v1/admin/dashboard`,
+    facilities: `${BASE_URL}/api/v1/admin/facilities`,
+    profile: `${BASE_URL}/api/v1/admin/profile`
 };
+
+localStorage.setItem("token", token);
+
+const token = localStorage.getItem("token");
+
+
+async function fetchDashboard() {
+
+    try {
+
+        const response = await fetch(API.dashboard, {
+
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+
+        });
+
+        const data = await response.json();
+
+        populateDashboard(data);
+
+    } catch(err) {
+
+        console.error(err);
+
+    }
+
+}
+
+
+function populateDashboard(data){
+
+    animateCounter(
+        "women",
+        data.summary.registeredWomen
+    );
+
+    animateCounter(
+        "anc",
+        data.summary.ancVisits
+    );
+
+    animateCounter(
+        "missed",
+        data.summary.missedVisits
+    );
+
+    animateCounter(
+        "flags",
+        data.summary.redFlags
+    );
+
+}
+
+// Dashboard Statistics
+// const dashboardStats = {
+//     women: 1422,
+//     anc: 1025,
+//     missed: 67,
+//     flags: 30
+// };
+
+
+
+async function fetchFacilities(){
+
+    const response = await fetch(API.facilities,{
+
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+
+    });
+
+    const data = await response.json();
+
+    loadFacilities(data.facilities);
+
+}
 
 // Facility Data
 const facilities = [
@@ -211,13 +291,39 @@ document.querySelectorAll(".card").forEach(card => {
 
 });
 
+async function fetchProfile(){
+
+    const response = await fetch(API.profile,{
+
+        headers:{
+            Authorization:`Bearer ${token}`
+        }
+
+    });
+
+    const data = await response.json();
+
+    document.getElementById("adminName").textContent =
+        `${data.admin.firstName} ${data.admin.lastName}`;
+
+    document.getElementById("adminRole").textContent =
+        data.admin.role;
+
+}
+
 // ==========================================
 // Initialize Dashboard
 // ==========================================
 
-animateCounter("women", dashboardStats.women);
-animateCounter("anc", dashboardStats.anc);
-animateCounter("missed", dashboardStats.missed);
-animateCounter("flags", dashboardStats.flags);
+fetchDashboard();
 
-loadFacilities();
+fetchFacilities();
+
+fetchProfile();
+
+// animateCounter("women", dashboardStats.women);
+// animateCounter("anc", dashboardStats.anc);
+// animateCounter("missed", dashboardStats.missed);
+// animateCounter("flags", dashboardStats.flags);
+
+// loadFacilities();

@@ -40,6 +40,32 @@
 //     window.location.href = "registration2.html";
 // });
 
+//=============================== functions start here =====================================
+
+function normalizePhone(phone) {
+    phone = phone.replace(/\s+/g, "");
+
+    if (phone.startsWith("+234")) {
+        return phone;
+    }
+
+    if (phone.startsWith("234")) {
+        return "+" + phone;
+    }
+
+    if (phone.startsWith("0")) {
+        return "+234" + phone.substring(1);
+    }
+
+    // 10-digit Nigerian number e.g. 8076345422
+    if (/^[789]\d{9}$/.test(phone)) {
+        return "+234" + phone;
+    }
+
+    return phone;
+}
+//===========================function ends here =====================================
+
 const form = document.getElementById("registrationForm");
 
 form.addEventListener("submit", (e) => {
@@ -51,7 +77,9 @@ form.addEventListener("submit", (e) => {
     const lastName = document.getElementById("lastName").value.trim();
 
 // Now use this 'fullName' variable for your registrationData object
-    const phone = document.getElementById("phone").value.trim();
+    //const phone = document.getElementById("phone").value.trim();
+    const phoneInput = document.getElementById("phone").value.trim();
+    const phone = normalizePhone(phoneInput);
     const address = document.getElementById("address").value.trim();
     const lga = document.getElementById("lga").value.trim();
     const language = document.getElementById("language").value;
