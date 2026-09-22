@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mama Check Admin Dashboard 2</title>
+      <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- css -->
+     <link rel="stylesheet" href="css/admin-Dshb2.css">
+     <!-- js -->
+     <script defer src="js/admin-Dshb2.js"></script>
+</head>
+<body>
+      <header class="header">
+        <div class="header-box1">
+            <img src="images/image 11.svg" alt="">
+            <p>Admin Dashboard</p>
+        </div>
+        <div class="header-box2">
+           <div class="hbox1">
+            <h2>Admin Dashboard</h2>
+            <p>Kano LGA · SPHCDA</p>
+           </div>
+
+           <div class="header-actions">
+                <div class="search">
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                    type="text"
+                    placeholder="Search...">
+                </div>
+
+                <button class="notify">
+                    <i class="fa-solid fa-bell"></i>
+
+                    <span>4 new alerts</span>
+                </button>
+            </div>
+        </div>
+
+    </header>
+
+<div class="wrapper">
+
+       <!-- =======================
+         SIDEBAR
+        ========================-->
+
+    <aside class="sidebar">
+
+        <ul class="menu">
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Territory Overview
+                </a>
+            </li>
+
+            <li>
+                <a href="adminRedflag.html">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Red Flags
+                </a>
+            </li>
+
+            <li>
+                <a href="adminReport.html">
+                    <i class="fa-solid fa-file-lines"></i>
+                    Reports
+                </a>
+            </li>
+
+             <li>
+                <a href="#">
+                    <i class="fa-solid fa-user-nurse"></i>
+                    Reassign Cases
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-hospital"></i>
+                    PHCs
+                </a>
+            </li>
+
+        </ul>
+
+
+        <div class="profile">
+
+            <div class="avatar">
+                NK
+            </div>
+
+            <div>
+
+                <h4>Nurse Ngozi Kalu</h4>
+                <span>Admin</span>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN -->
+     <main>
+        <!-- Stats Section -->
+         <section class="stats">
+
+            <div class="card">
+
+                <div>
+
+                    <small>Registered Women</small>
+
+                    <h1 id="women">0</h1>
+
+                    <span class="green">
+                       ↗+58 this week
+                    </span>
+
+                </div>
+
+                <img src="images/greenprofile.png" alt="">
+
+            </div>
+
+              <div class="card">
+
+                <div>
+
+                    <small>ANC Visits(Nov)</small>
+
+                    <h1 id="anc">0</h1>
+
+                    <span class="green">
+                       ↗ 82% completion
+                    </span>
+
+                </div>
+
+                <img src="images/greenmedic.png" alt="">
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Missed Visits</small>
+
+                    <h1 id="missed">0</h1>
+
+                    <span class="red">
+                       ↘ +12 this month
+                    </span>
+
+                </div>
+
+                <img src="images/orangeclock.png" alt="">
+
+            </div>
+
+
+            <div class="card">
+
+                <div>
+
+                    <small>Open Red Flags</small>
+
+                    <h1 id="flags">0</h1>
+
+                    <span class="red">
+                       ↘ 4 overdue
+                    </span>
+
+                </div>
+
+                <img src="images/redcaution.png" alt="">
+
+            </div>
+
+         </section>
+
+         <!-- text seperator -->
+         <div class="text-seperator">
+            <small class="territory">pHCs in territory</small>
+            <small>Red flag escalations</small>
+            <small>Reports</small>
+         </div>
+
+         <!-- text seperator -->
+          <a href="/" class="facilities"><span class="arrow">←</span> facilities</a>
+
+         <!-- phc -->
+          <section class="phc-section">
+            <!-- first -->
+                <div class="phc-header">
+                    <h4>PHC Kano Central </h4>
+                    <small>Kano Municipal · 4 CHEWs · 198 registered women</small>
+                </div>
+               
+             <!-- second -->
+              <div class="phc-cards">
+                 <div class="phc-card">
+
+                   <div>
+                     <small>WOMEN REGISTERED</small>
+
+                    <h1 id="phcwomen">0</h1>
+                   </div>
+
+                   <img src="images/greenprofile.png" alt="">
+
+                </div>
+
+                 <div class="phc-card">
+
+                <div class="phc-text">
+                     <small>ANC VISITS ATTENTED</small>
+
+                    <h1 id="phcanc">0</h1>
+                </div>
+                 <img src="images/greenmedic.png" alt="">
+
+                </div>
+
+                 <div class="phc-card">
+
+                   <div class="phc-text">
+                     <small>Missed Visits</small>
+
+                    <h1 id="phcmissed">0</h1>
+                   </div>
+                   <img src="images/orangeclock.png" alt="">
+
+                </div>
+
+                 <div class="phc-card">
+                 <div class="phc-text">
+                     <small>RED FLAGS</small>
+
+                   <h1 id="phcflags">0 </h1> 
+                 </div>
+
+                   <img src="images/redcaution.png" alt="">
+
+                 </div>
+
+              </div>
+          </section>
+
+          <!-- CHEW TABLE -->
+
+        <section class="table-section">
+
+                <div class="table-header">
+
+                    <h3>Facilities Under Your Watch</h3>
+
+                    <p>Select a PHC to view details.</p>
+
+                </div>
+
+
+            <table>
+
+                <thead>
+
+                <tr>
+
+                    <th>Facility</th>
+
+                    <th>Women</th>
+
+                    <th> Visits</th>
+
+                    <th>Missed</th>
+
+                    <th>Red Flags</th>
+
+                    <th>CHEWs</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="chewTable">
+
+                <!-- Filled by JavaScript -->
+
+                </tbody>
+
+            </table>
+
+        </section>
+    
+     </main>
+
+    </div>    
+</body>
+</html>

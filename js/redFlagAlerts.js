@@ -108,6 +108,46 @@ function populateRflagAlerts() {
                 </div>
                         `
                         rflagCards.appendChild(rflag);
+                        const closeCaseBtn = rflag.querySelector(".close-red");
+                        closeCaseBtn.addEventListener("click", () => {
+                           openModal(rflagcard);
+                        });
    })
 }
 populateRflagAlerts()
+
+// modal function
+   const closeRflag = document.querySelector(".closeRflag");
+   const closeRflagName = document.getElementById("closedredflag-name");
+   const closeredflagCancel = document.querySelectorAll(".closeredflag-cancel");
+   const closeCaseDeleteBtn = document.querySelector(".closeCase-btn");
+
+  // FIX: cancel buttons were not safely checking if the modal existed before hiding it.
+  // This keeps the modal from throwing errors when the page loads.
+  closeredflagCancel.forEach(cancel => {
+      cancel.addEventListener("click", () => {
+         if (closeRflag) {
+            closeRflag.style.display = "none";
+         }
+      });
+   });
+
+function openModal(flag) {
+   // FIX: if the modal elements are missing, do nothing instead of crashing.
+   if (!closeRflag || !closeRflagName || !closeCaseDeleteBtn) return;
+
+   // This puts the selected patient's name into the modal.
+   closeRflagName.textContent = flag.name;
+   // FIX: use flex to match the layout we want when the modal is shown.
+   closeRflag.style.display = "flex";
+   
+   // Delete logic: remove the selected patient from the array and refresh the list.
+   closeCaseDeleteBtn.onclick = () => {
+      const flagIndex = rFlagAlerts.indexOf(flag);
+      if (flagIndex > -1) {
+         rFlagAlerts.splice(flagIndex, 1);
+      }
+      closeRflag.style.display = "none";
+      populateRflagAlerts();
+   };
+}
