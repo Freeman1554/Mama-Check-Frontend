@@ -150,7 +150,7 @@ function animateCounter(id, target) {
 
     const timer = setInterval(() => {
 
-        current += increment;
+        current += increment;   
 
         if (current >= target) {
 
